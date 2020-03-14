@@ -1,0 +1,11 @@
+Realizzare un programma JavaFX che permetta all'utente di giocare ad IndovinaNumero.
+
+In ogni partita il programma deve inventare un numero casuale tra 1 e NMAX (estremi 
+compresi) e l'utente deve tentare di indovinare il numero segreto. 
+Ad ogni tentativo, il programma potra' rispondere in tre modi : 'Numero esatto' e
+termina la partita, 'troppo basso' oppure 'troppo alto'. 
+L'utente ha un numero di tentativi limitato TMAX per poter indovinare il numero segreto.
+In ogni momento il porgramma visualizza il numero di tentativi ancora disponibili. 
+Una partita termina perche' il numero e' stato indovinato oppure perche' sono stati 
+esauriti tutti i tentativi disponibili. 
+A termine partita se ne puo' sempre iniziare una nuova con un nuovo numero segreto. 

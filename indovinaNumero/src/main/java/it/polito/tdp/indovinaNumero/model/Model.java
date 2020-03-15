@@ -1,6 +1,8 @@
 package it.polito.tdp.indovinaNumero.model;
 
 import java.security.InvalidParameterException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Model {
 
@@ -9,6 +11,8 @@ public class Model {
     private int segreto; //variabile 
 	private int tentativiFatti; 
 	private boolean inGioco;  //sono ancora vivo o no
+	
+	private Set<Integer> tentativi; // traccia dei tentativi fatti
 	
 	public Model() {
 		// nel costruttore inserisco tutte le operazioni da effettuare quando
@@ -29,6 +33,8 @@ public class Model {
     	
     	this.tentativiFatti=0; 
     	this.inGioco=true; 
+    	
+    	this.tentativi= new HashSet<Integer>(); 
 	}
 	
 	//decido che il valore di ritorno sia significativo per fare capire se
@@ -46,7 +52,7 @@ public class Model {
 		// ricevo gia' un int quindi qst controllo lo lascio al Controller
 		// ma sono nell'intervallo corretto?
 		if (!tentativoValido(tentativo)) {
-			throw new InvalidParameterException("Devi inserire un numero tra 1 e "+NMAX); 
+			throw new InvalidParameterException("Devi inserire un numero che non hai ancora utilizzato tra 1 e "+NMAX+"\n"); 
 		}
 		
 		//il tentativo e' valido 
@@ -54,6 +60,9 @@ public class Model {
 		
 		//aggiorno il numero di tentativi effettuati; 
     	this.tentativiFatti++; 
+    	
+    	// ad ogni tentativo, lo memorizzo
+    	this.tentativi.add(tentativo); 
     	
     	if (this.tentativiFatti==TMAX) {
     		//ho finito i tentativi quindi ho terminato la partita
@@ -81,7 +90,13 @@ public class Model {
 		
 		if (tentativo<1 || tentativo>NMAX)
 			return false; 
-		else return true; 
+		else {
+			// e' gia' sttao utilizzato?
+			if (this.tentativi.contains(tentativo)) {
+				return false; 
+			}
+			else return true; 
+		}
 	}
 
 	public int getSegreto() {
